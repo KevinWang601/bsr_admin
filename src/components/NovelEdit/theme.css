@@ -1,0 +1,16 @@
+[class~='ant-radio-button-wrapper'] {
+  position: relative;
+  display: inline-block;
+  height: auto !important;
+  margin-right: 24px;
+  padding: 2px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: auto !important;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top-width: 1.02px;
+  border-left-width: 0;
+  cursor: pointer;
+  transition: color 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}

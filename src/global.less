@@ -1,0 +1,96 @@
+@import '~antd/es/style/variable.less';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+.ant-pro-sider.ant-layout-sider.ant-pro-sider-fixed {
+  left: unset;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// Compatible with IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+  body .ant-design-pro > .ant-layout {
+    min-height: 100vh;
+  }
+}
+
+.ant-pro-fixed-header .ant-pro-global-header {
+  padding: 0;
+}
+
+.ant-pro-basicLayout-content {
+  position: relative;
+  margin: 12px;
+}
+
+.ant-pro-table .ant-pro-table-search {
+  margin-bottom: 12px;
+  padding: 12px;
+  padding-bottom: 0;
+  background: #fff;
+}
+.ant-form-item {
+  margin-bottom: 12px;
+}
+.ant-form-item-label {
+  max-width: 80px;
+  overflow: hidden;
+  text-align: left !important;
+}
+
+.ant-radio-group {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 328px;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-size: 0;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: 'tnum', 'tnum';
+}
