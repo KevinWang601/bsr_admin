@@ -1,75 +1,89 @@
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
+import { withdrawList } from '@/services/payment';
 import { useRef } from 'react';
 import { message } from 'antd';
 import { useState } from 'react';
 import OperationView from '@/components/OperationView';
 import { timeZoneConverter } from '@/util';
-import { appVersionList } from '@/services/app_version';
-import AppVersionEdit from '@/components/AppVersionEdit';
 import { useParams } from 'umi';
+import WithdrawEdit from '@/components/WithdrawEdit';
+import EncryptedImage from '@/components/EncryptedImage';
 
-const AppVersionList: React.FC = () => {
+
+const WithdrawList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
   const menuId = queryParams.id;
 
   const actionRef = useRef<ActionType>();
   const [operations, setOperations] = useState<Operation[]>([]);
 
-  const columns: ProColumns<DTO.AppVersionListItem>[] = [
+  const columns: ProColumns<DTO.WithdrawListItem>[] = [
     {
-      title: '平台',
-      render: (dom, record) => {
-        return record.platform === 1 ? '安卓' : '苹果';
-      },
-      formItemProps: { label: '平台', name: 'platform' },
-      valueType: 'select',
-      request: async () => {
-        return [
-          { label: '全部', value: 0 },
-          { label: '安卓', value: 1 },
-          { label: '苹果', value: 2 },
-        ];
-      },
-    },
-    {
-      title: '版本名称',
+      title: '会员',
       formItemProps: { label: '关键字', name: 'keyword' },
-      dataIndex: 'versionName',
+      dataIndex: 'loginName',
     },
     {
-      title: '版本说明',
+      title: '地址',
       search: false,
-      dataIndex: 'versionNote',
+      dataIndex: 'address',
       width: 260,
       ellipsis: true,
+      copyable: true,
     },
     {
-      title: '下载地址',
+      title: '提现金额',
       search: false,
-      dataIndex: 'downloadUrl',
-      width: 260,
-      ellipsis: true,
+      dataIndex: 'amount',
     },
     {
-      title: '强制升级',
+      title: '打款凭证',
       search: false,
+      width: 80,
       render: (dom, record) => {
-        return record.forceUpgrade == 1 ? '是' : '否';
+        if (record.proofUrl === null || record.proofUrl === '') {
+          return '';
+        } else {
+          return <EncryptedImage src={record.proofUrl} width={32} height={32} />;
+        }
       },
     },
     {
       title: '状态',
+      dataIndex: 'statusDesc',
+      formItemProps: { label: '状态', name: 'status' },
+      render: (dom, record) => {
+        return record.statusDesc;
+      },
+      valueType: 'select',
+      request: async () => {
+        return [
+          { label: '全部', value: -1 },
+          { label: '待下发', value: 0 },
+          { label: '已下发', value: 1 },
+          { label: '下发失败', value: 2 },
+          { label: '未知', value: 999 },
+        ];
+      },
+      width: 80,
+    },
+    {
+      title: '更新时间',
       search: false,
       render: (dom, record) => {
-        return record.status == 1 ? '正常' : <span style={{ color: '#F94A29' }}>下架</span>;
+        return timeZoneConverter(record.updateTime);
       },
     },
     {
       title: '创建时间',
-      search: false,
-      width: 180,
+      valueType: 'dateRange',
+      dataIndex: 'dateRagge',
+      formItemProps: { label: '创建时间' },
+      search: {
+        transform: (value: any) => ({ startTime: value[0], endTime: value[1] }),
+      },
       render: (dom, record) => {
         return timeZoneConverter(record.createTime);
       },
@@ -81,7 +95,9 @@ const AppVersionList: React.FC = () => {
       render: (dom, record, index) => (
         <OperationView
           key={index}
-          component={[{ name: '编辑', component: AppVersionEdit }]}
+          component={[
+            { name: '编辑', component: WithdrawEdit },
+          ]}
           operations={operations}
           record={record}
           actionRef={actionRef}
@@ -93,20 +109,23 @@ const AppVersionList: React.FC = () => {
   ];
 
   return (
-    <ProTable<DTO.AppEdnpointListItem>
+    <ProTable<DTO.WithdrawListItem>
       rowKey="id"
       columns={columns}
       actionRef={actionRef}
       cardBordered
-      expandable={{ expandIconColumnIndex: -1 }}
+      scroll={{ x: 'max-content' }}
       request={async (params = {}, sort, filter) => {
         console.log(params, sort, filter);
-        const result = await appVersionList(
+        const result = await withdrawList(
           menuId || '',
           params.current || 1,
           params.pageSize || 20,
           params.keyword || '',
-          params.platform || 0,
+          params.status || -1,
+          params.startTime || '',
+          params.endTime || '',
+          Intl.DateTimeFormat().resolvedOptions().timeZone,
         );
         setOperations([...result.model.operations]);
         return {
@@ -127,7 +146,7 @@ const AppVersionList: React.FC = () => {
       toolBarRender={() => [
         <OperationView
           key={nanoid()}
-          component={[{ name: '新增', component: AppVersionEdit }]}
+          component={[]}
           operations={operations}
           actionRef={actionRef}
           position={1}
@@ -137,4 +156,4 @@ const AppVersionList: React.FC = () => {
     />
   );
 };
-export default AppVersionList;
+export default WithdrawList;

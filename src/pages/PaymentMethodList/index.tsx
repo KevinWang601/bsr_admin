@@ -3,11 +3,12 @@ import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { paymentMethodList } from '@/services/payment';
 import { useRef } from 'react';
-import { message, Image } from 'antd';
+import { message } from 'antd';
 import { useState } from 'react';
 import OperationView from '@/components/OperationView';
 import PaymentMethodEdit from '@/components/PaymentMethodEdit';
 import { useParams } from 'umi';
+import EncryptedImage from '@/components/EncryptedImage';
 
 const PaymentMethodList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
@@ -26,7 +27,7 @@ const PaymentMethodList: React.FC = () => {
       title: '图标',
       search: false,
       render: (dom, record) => {
-        return <Image src={record.iconUrl} width={36} height={36} />;
+        return <EncryptedImage src={record.iconUrl} width={36} height={36}/>;
       },
     },
     {

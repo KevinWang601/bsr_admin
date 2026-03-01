@@ -28,6 +28,34 @@ const TagList: React.FC = () => {
       dataIndex: 'slug',
     },
     {
+      title: '性别偏好',
+      width: 80,
+      render: (dom, record) => {
+        return record.gender === 0 ? '均可' : record.gender === 1 ? '男频' : '女频';
+      },
+      initialValue: '-1',
+      valueType: 'select',
+      formItemProps: { label: '性别偏好', name: 'gender' },
+      request: async () => [
+        {
+          label: '请选择',
+          value: '-1',
+        },
+        {
+          label: '均可',
+          value: '0',
+        },
+        {
+          label: '男频',
+          value: '1',
+        },
+        {
+          label: '女频',
+          value: '2',
+        },  
+      ],
+    },
+    {
       title: '适合年龄',
       width: 80,
       render: (dom, record) => {

@@ -1,34 +1,30 @@
 import { getFormData } from '@/util';
 import type { ProFormInstance } from '@ant-design/pro-components';
-import { ProFormField, ProFormTextArea } from '@ant-design/pro-components';
-import { ProFormRadio, ProFormText } from '@ant-design/pro-components';
+import { ProFormField } from '@ant-design/pro-components';
 import { ProForm } from '@ant-design/pro-components';
 import { DrawerForm } from '@ant-design/pro-components';
 import type { UploadFile, UploadProps } from 'antd';
 import { Upload } from 'antd';
 import { request } from 'umi';
-import styles from './index.module.css';
 import { message, Image } from 'antd';
 import type { RcFile } from 'antd/lib/upload';
 import { useRef, useState } from 'react';
 
-const TranslationAgencyEdit: React.FC<EditType> = (props) => {
+import styles from './index.module.css';
+
+const WithdrawEdit: React.FC<EditType> = (props) => {
   const { trigger, record, actionRef, url } = props;
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const [logoUrl, setLogoUrl] = useState<string>('');
+  const [proofUrl, setProofUrl] = useState<string>('');
 
   const formRef = useRef<ProFormInstance>();
 
   const visibleChange = (visible: boolean) => {
     if (visible) {
-      formRef.current?.setFieldsValue(
-        record || {
-          status: 1,
-        },
-      );
+      formRef.current?.setFieldsValue(record);
       if (record) {
-        setLogoUrl(record.logoUrl);
+        setProofUrl(record.proofUrl);
       }
     } else {
       if (actionRef && actionRef.current) {
@@ -48,12 +44,12 @@ const TranslationAgencyEdit: React.FC<EditType> = (props) => {
           reader.onload = () => resolve(reader.result as string);
         });
       }
-      setLogoUrl(src);
+      setProofUrl(src);
       return false;
     },
     onRemove: () => {
       setFileList([...[]]);
-      setLogoUrl('');
+      setProofUrl('');
     },
     multiple: false,
     maxCount: 1,
@@ -67,7 +63,7 @@ const TranslationAgencyEdit: React.FC<EditType> = (props) => {
       trigger={trigger}
       onVisibleChange={visibleChange}
       onFinish={async (values) => {
-        if ((fileList === null || fileList.length === 0) && logoUrl === '') {
+        if ((fileList === null || fileList.length === 0) && proofUrl === '') {
           message.error('请选择需要上传的文件');
           return;
         }
@@ -85,7 +81,7 @@ const TranslationAgencyEdit: React.FC<EditType> = (props) => {
           if (actionRef && actionRef.current) {
             actionRef.current.reload();
           }
-          setLogoUrl('');
+          setProofUrl('');
           return true;
         } else {
           message.error(resp.msg);
@@ -95,16 +91,6 @@ const TranslationAgencyEdit: React.FC<EditType> = (props) => {
     >
       <ProFormField hidden={true} name="id" />
       <ProForm.Group>
-        <ProFormText width="md" name="name" label="名称" placeholder="请输入名称" />
-        <ProFormText width="md" name="contact" label="联系方式" placeholder="请输入联系方式" />
-      </ProForm.Group>
-      <ProForm.Group>
-        <ProFormTextArea
-          width={480}
-          fieldProps={{ style: { height: '160px' }, maxLength: 500 }}
-          label="简介"
-          name="brief"
-        />
         <Upload {...uploadProps}>
           <div>
             <div>
@@ -112,38 +98,22 @@ const TranslationAgencyEdit: React.FC<EditType> = (props) => {
                 <span className={styles.redpoint} style={{ color: '#ff4d4f' }}>
                   *
                 </span>{' '}
-                上传logo
+                上传凭证
               </span>
             </div>
             <div style={{ marginTop: '8px' }}>
               <Image
-                width={120}
-                height={120}
+                width={108}
+                height={160}
                 preview={false}
-                src={logoUrl !== '' ? logoUrl : 'error'}
-                fallback="https://toolb.cn/iph/120x120?t=Upload&bg=b7b7b7"
+                src={proofUrl !== '' ? proofUrl : 'error'}
+                fallback="https://toolb.cn/iph/108x160?t=Upload&bg=b7b7b7"
               />
             </div>
           </div>
         </Upload>
       </ProForm.Group>
-      <ProForm.Group>
-        <ProFormRadio.Group
-          name="status"
-          label="状态"
-          options={[
-            {
-              label: '正常',
-              value: 1,
-            },
-            {
-              label: '隐藏',
-              value: 0,
-            },
-          ]}
-        />
-      </ProForm.Group>
     </DrawerForm>
   );
 };
-export default TranslationAgencyEdit;
+export default WithdrawEdit;

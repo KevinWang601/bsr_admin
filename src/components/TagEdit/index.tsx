@@ -13,7 +13,7 @@ const TagEdit: React.FC<EditType> = (props) => {
 
   const visibleChange = (visible: boolean) => {
     if (visible) {
-      formRef.current?.setFieldsValue(record || { adults: 0, sort: 0 });
+      formRef.current?.setFieldsValue(record || { gender: 1, adults: 0, sort: 0 });
     }
   };
 
@@ -64,6 +64,26 @@ const TagEdit: React.FC<EditType> = (props) => {
       <ProForm.Group>
         <ProFormRadio.Group
           width="md"
+          name="gender"
+          label="性别偏好"
+          options={[
+            {
+              label: '均可',
+              value: 0,
+            },
+            {
+              label: '男频',
+              value: 1,
+            },
+            {
+              label: '女频',
+              value: 2,
+            },
+          ]}
+          rules={[{ required: true, message: '请选择性别偏好' }]}
+        />
+        <ProFormRadio.Group
+          width="md"
           name="adults"
           label="适合年龄"
           options={[
@@ -78,6 +98,8 @@ const TagEdit: React.FC<EditType> = (props) => {
           ]}
           rules={[{ required: true, message: '请选择适合年龄' }]}
         />
+      </ProForm.Group>
+      <ProForm.Group>
         <ProFormDigit
           width="md"
           name="sort"

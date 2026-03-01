@@ -173,3 +173,32 @@ export async function meatyBonesList(menuId: string, page: number, rows: number,
     processData: false,
   });
 }
+
+
+/** 获的提现列表 POST /console/admin/widthdraw/list */
+export async function withdrawList(
+  menuId: string,
+  page: number,
+  rows: number,
+  keyword?: string,
+  status?: number,
+  startTime?: string,
+  endTime?: string,
+  timeZone?: string,
+) {
+  return request<DTO.Resp<any>>(`${API_URL}/console/admin/withdraw/list`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    data: getQueryString({
+      menuId: menuId,
+      page: page,
+      rows: rows,
+      keyword: keyword,
+      startTime: startTime,
+      endTime: endTime,
+      timeZone: timeZone,
+      status: status,
+    }),
+    processData: false,
+  });
+}

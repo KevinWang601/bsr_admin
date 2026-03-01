@@ -55,7 +55,7 @@ const CategoryList: React.FC = () => {
       title: '适合性别',
       width: 80,
       render: (dom, record) => {
-        return record.gender === 1 ? '男频' : '女频';
+        return record.gender === 0 ? '均可' : record.gender === 1 ? '男频' : '女频';
       },
       initialValue: '-1',
       valueType: 'select',

@@ -26,10 +26,14 @@ export async function novelTagList(
 }
 
 /** 获取小说标签列表 POST /novel/admin/novel/tags */
-export async function novelTags() {
+export async function novelTags(gender: number, adults: number) {
   return request<DTO.Resp<any>>(`${API_URL}/novel/admin/novel/tags`, {
-    method: 'GET',
+    method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    data: getQueryString({
+      gender: gender,
+      adults: adults,
+    }),
     processData: false,
   });
 }

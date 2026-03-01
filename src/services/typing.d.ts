@@ -147,6 +147,7 @@ declare namespace DTO {
     id?: string;
     name?: string;
     slug?: string;
+    gender?: number;
     adults?: number;
     sort?: number;
   };
@@ -338,6 +339,22 @@ declare namespace DTO {
     statusDesc?: string;
   };
 
+
+  type WithdrawListItem = {
+    id?: string;
+    customerId?: string;
+    amount?: number;
+    address?: string;
+    proof?: string;
+    proofUrl?: string;
+    updateTime?: Date;
+    createTime?: Date;
+    status?: number;
+    note?: string;
+    loginName?: string;
+    statusDesc?: string;
+  };
+
   type BalanceRecordListItem = {
     id?: string;
     customerId?: string;
@@ -483,32 +500,6 @@ declare namespace DTO {
     startTime?: Date;
     endTime?: Date;
     createTime?: Date;
-    status?: number;
-  };
-
-  type SignInSettingListItem = {
-    id?: string;
-    dateName?: string;
-    continueDay?: number;
-    integral?: number;
-    continueIntegral?: number;
-    sort?: number;
-  };
-
-  type CouponListItem = {
-    id?: string;
-    name?: string;
-    type?: number;
-    integral?: number;
-    val?: number;
-    image?: string;
-    stock?: number;
-    fixedStock?: number;
-    validDay?: number;
-    registerAward?: number;
-    imageUrl?: string;
-    productNames?: string;
-    sort?: number;
     status?: number;
   };
 

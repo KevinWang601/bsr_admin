@@ -101,8 +101,9 @@ const NovelEdit: React.FC<EditType> = (props) => {
   /**
    * 获取小说标签
    */
-  const getTags = async () => {
-    const result = await novelTags();
+  const getTags = async (gender: number, adults: number) => {
+    debugger
+    const result = await novelTags(gender, adults);
     if (result.result !== 'success') {
       message.error('获取小说标签失败');
       return;
@@ -162,7 +163,7 @@ const NovelEdit: React.FC<EditType> = (props) => {
           recommend: 0,
           top: 0,
           adults: 0,
-          gender: 0,
+          gender: 1,
           autoUpdate: 1,
           startMemberChapter: 0,
           startPriceChapter: 0,
@@ -183,7 +184,7 @@ const NovelEdit: React.FC<EditType> = (props) => {
         debugger;
         formRef.current?.setFieldsValue({ tag: result.model });
         setSelectedTags(result.model);
-        await getTags();
+        await getTags(record.gender, record.adults);
         result = await getNovel(record.id);
         if (result.result !== 'success') {
           message.error('获取作品信息失败');
@@ -198,7 +199,7 @@ const NovelEdit: React.FC<EditType> = (props) => {
         setCover('');
         setCoverUrl('');
         setSelectedTags([]);
-        await getTags();
+        await getTags(1, 0);
       }
     }
   };
@@ -422,6 +423,11 @@ const NovelEdit: React.FC<EditType> = (props) => {
                   value: 0,
                 },
               ]}
+              fieldProps={{
+                onChange: (item) => {
+                  getTags(formRef.current?.getFieldValue('gender'), item.target.value);
+                },
+              }}
               rules={[{ required: true, message: '请选择是否限制级' }]}
             />
             <ProFormRadio.Group
@@ -438,6 +444,11 @@ const NovelEdit: React.FC<EditType> = (props) => {
                   value: 2,
                 },
               ]}
+              fieldProps={{
+                onChange: (item) => {
+                  getTags(item.target.value, formRef.current?.getFieldValue('adults'));
+                },
+              }}
               rules={[{ required: true, message: '请选择适合性别' }]}
             />
             <ProFormRadio.Group

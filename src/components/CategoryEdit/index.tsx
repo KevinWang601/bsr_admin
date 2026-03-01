@@ -68,6 +68,10 @@ const CategoryEdit: React.FC<EditType> = (props) => {
           label="适合性别"
           options={[
             {
+              label: '均可',
+              value: 0,
+            },
+            {
               label: '男频',
               value: 1,
             },

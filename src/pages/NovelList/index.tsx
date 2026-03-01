@@ -74,7 +74,7 @@ const TagSelect: React.FC<{
 
   useEffect(() => {
     async function fetchData() {
-      const resp = await novelTags();
+      const resp = await novelTags(-1, -1);
       if (resp.result !== 'success') return;
       const tags = resp.model;
       const options: SetStateAction<{ label: string; value: string }[]> = [
