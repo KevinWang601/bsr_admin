@@ -3,7 +3,7 @@ import { defineConfig } from 'umi';
 
 const API_URL = 'http://127.0.0.1:8888';
 
-// const API_URL = 'https://api.favcomic.com';
+// const API_URL = 'https://api.banshanren.com';
 
 export default defineConfig({
   dva: {
