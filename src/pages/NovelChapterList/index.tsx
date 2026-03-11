@@ -9,7 +9,6 @@ import { useState } from 'react';
 import OperationView from '@/components/OperationView';
 import { timeZoneConverter } from '@/util';
 import ChapterVipEdit from '@/components/ChapterVipEdit';
-import ComicChapterSync from '@/components/ComicChapterSync';
 import { useParams } from 'umi';
 import NovelChapterEdit from '@/components/NovelChapterEdit';
 
@@ -167,7 +166,6 @@ const NovelChapterList: React.FC = () => {
           component={[
             { name: '付费', component: ChapterVipEdit },
             { name: '编辑', component: NovelChapterEdit },
-            { name: '同步', component: ComicChapterSync },
           ]}
           operations={operations}
           record={record}

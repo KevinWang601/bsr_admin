@@ -11,7 +11,6 @@ import { timeZoneConverter } from '@/util';
 import NovelEdit from '@/components/NovelEdit';
 import NovelChapterAdd from '@/components/NovelChapterAdd';
 import ComicBatchSync from '@/components/ComicBatchSync';
-import ComicMigrateEdit from '@/components/ComicMigrateEdit';
 import { useParams } from 'umi';
 import EncryptedImage from '@/components/EncryptedImage';
 import { novelCategories } from '@/services/category';
@@ -409,7 +408,6 @@ const NovelList: React.FC = () => {
             { name: '新增卷', component: NovelVolumeAdd },
             { name: '新增章', component: NovelChapterAdd },
             { name: '付费', component: NovelVipEdit },
-            { name: '迁移', component: ComicMigrateEdit },
           ]}
           operations={operations}
           record={record}

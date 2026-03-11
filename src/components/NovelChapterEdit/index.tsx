@@ -164,6 +164,21 @@ const NovelChapterEdit: React.FC<EditType> = (props) => {
               style: {
                 height: 560,
               },
+              onPaste: (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+                e.preventDefault();
+                const textarea = e.target as HTMLTextAreaElement;
+                const text = e.clipboardData.getData("text");
+                const formatted = text
+                  .replace(/\n+/g, "\n");
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const value = textarea.value;
+                const newValue =
+                  value.substring(0, start) + formatted + value.substring(end);
+                textarea.value = newValue;
+                textarea.selectionStart = textarea.selectionEnd =
+                  start + formatted.length;
+              },
             }}
           />
         </Col>

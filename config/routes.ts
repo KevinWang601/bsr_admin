@@ -66,6 +66,17 @@ export default [
     ],
   },
   {
+    path: "/workbench",
+    name: "工作台管理",
+    routes: [
+      {
+        name: "公告管理",
+        path: "/workbench/bulletin/:id",
+        component: "./BulletinList",
+      },
+    ]
+  },
+  {
     path: "/novel",
     name: "小说管理",
     routes: [

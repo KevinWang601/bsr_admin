@@ -531,6 +531,15 @@ declare namespace DTO {
     customer?: CustomerListItem;
   };
 
+  type BulletinListItem = {
+    id?: string;
+    title?: string;
+    content?: string;
+    publisher?: string;
+    level?: number;
+    createTime?: Date;
+  };
+
   type SeoMetaListItem = {
     id?: string;
     host?: number;
