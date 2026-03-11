@@ -175,9 +175,7 @@ const NovelChapterEdit: React.FC<EditType> = (props) => {
                 const value = textarea.value;
                 const newValue =
                   value.substring(0, start) + formatted + value.substring(end);
-                textarea.value = newValue;
-                textarea.selectionStart = textarea.selectionEnd =
-                  start + formatted.length;
+                formRef.current?.setFieldsValue({ content: newValue });
               },
             }}
           />
