@@ -156,6 +156,7 @@ const NovelChapterAdd: React.FC<EditType> = (props) => {
                 const textarea = e.target as HTMLTextAreaElement;
                 const text = e.clipboardData.getData("text");
                 const formatted = text
+                  .replace(/\r\n/g, "\n")
                   .replace(/\n+/g, "\n");
                 const start = textarea.selectionStart;
                 const end = textarea.selectionEnd;
