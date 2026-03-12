@@ -31,6 +31,7 @@ const NovelChapterAdd: React.FC<EditType> = (props) => {
         price: 0,
         sort: record.chapterCount + 1,
         status: 1,
+        content: '',
       });
     }
   };
@@ -161,9 +162,7 @@ const NovelChapterAdd: React.FC<EditType> = (props) => {
                 const value = textarea.value;
                 const newValue =
                   value.substring(0, start) + formatted + value.substring(end);
-                textarea.value = newValue;
-                textarea.selectionStart = textarea.selectionEnd =
-                  start + formatted.length;
+                formRef.current?.setFieldsValue({ content: newValue });
               },
             }}
           />
