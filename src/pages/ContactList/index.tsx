@@ -9,6 +9,7 @@ import { timeZoneConverter } from '@/util';
 import OperationView from '@/components/OperationView';
 import ReplyContactEdit from '@/components/ReplyContactEdit';
 import { useParams } from 'umi';
+import EncryptedImage from '@/components/EncryptedImage';
 
 const ContactList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
@@ -47,7 +48,7 @@ const ContactList: React.FC = () => {
       search: false,
       render: (dom, record) => {
         if (record.imageUrl === '') return '';
-        return <Image src={record.imageUrl} width={72} height={36} />;
+        return <EncryptedImage src={record.imageUrl} width={72} height={36} />;
       },
     },
     {

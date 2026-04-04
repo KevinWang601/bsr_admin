@@ -10,13 +10,14 @@ import OperationView from '@/components/OperationView';
 import { timeZoneConverter } from '@/util';
 import NovelEdit from '@/components/NovelEdit';
 import NovelChapterAdd from '@/components/NovelChapterAdd';
-import ComicBatchSync from '@/components/ComicBatchSync';
 import { useParams } from 'umi';
 import EncryptedImage from '@/components/EncryptedImage';
 import { novelCategories } from '@/services/category';
 import { novelTags } from '@/services/tag';
 import NovelVipEdit from '@/components/NovelVipEdit';
 import NovelVolumeAdd from '@/components/NovelVolumeAdd';
+import NovelSpiderConfigEdit from '@/components/NovelSpiderConfigEdit';
+import NovelBatchSync from '@/components/NovelBatchSync';
 
 const CategorySelect: React.FC<{
   value?: string;
@@ -405,9 +406,10 @@ const NovelList: React.FC = () => {
           key={index}
           component={[
             { name: '编辑', component: NovelEdit },
+            { name: '付费', component: NovelVipEdit },
             { name: '新增卷', component: NovelVolumeAdd },
             { name: '新增章', component: NovelChapterAdd },
-            { name: '付费', component: NovelVipEdit },
+            { name: '爬虫配置', component: NovelSpiderConfigEdit },
           ]}
           operations={operations}
           record={record}
@@ -545,7 +547,7 @@ const NovelList: React.FC = () => {
           ids={ids.join(',')}
           component={[
             { name: '新增', component: NovelEdit },
-            { name: '批量同步', component: ComicBatchSync },
+            { name: '批量同步', component: NovelBatchSync },
           ]}
           operations={operations}
           actionRef={actionRef}

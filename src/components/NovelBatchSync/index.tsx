@@ -6,7 +6,7 @@ import { message } from 'antd';
 import { useRef } from 'react';
 import { request } from 'umi';
 
-const ComicBatchSync: React.FC<EditType> = (props) => {
+const NovelBatchSync: React.FC<EditType> = (props) => {
   const { trigger, record, actionRef, url } = props;
 
   const formRef = useRef<ProFormInstance>();
@@ -54,4 +54,4 @@ const ComicBatchSync: React.FC<EditType> = (props) => {
     </DrawerForm>
   );
 };
-export default ComicBatchSync;
+export default NovelBatchSync;
