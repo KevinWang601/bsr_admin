@@ -59,7 +59,7 @@ const TagList: React.FC = () => {
       title: '适合年龄',
       width: 80,
       render: (dom, record) => {
-        return record.adults === 0 ? '全年龄' : '大人系';
+        return record.adults === 2 ? '均可' : record.adults === 0 ? '全年龄' : '大人系';
       },
       initialValue: '-1',
       valueType: 'select',
@@ -68,6 +68,10 @@ const TagList: React.FC = () => {
         {
           label: '请选择',
           value: '-1',
+        },
+        {
+          label: '均可',
+          value: '2',
         },
         {
           label: '全年龄',
