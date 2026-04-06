@@ -13,7 +13,7 @@ const TagEdit: React.FC<EditType> = (props) => {
 
   const visibleChange = (visible: boolean) => {
     if (visible) {
-      formRef.current?.setFieldsValue(record || { gender: 1, adults: 0, sort: 0 });
+      formRef.current?.setFieldsValue(record || { gender: 0, adults: 2, sort: 0 });
     }
   };
 
@@ -87,6 +87,10 @@ const TagEdit: React.FC<EditType> = (props) => {
           name="adults"
           label="适合年龄"
           options={[
+            {
+              label: '均可',
+              value: 2,
+            },
             {
               label: '全年龄',
               value: 0,
