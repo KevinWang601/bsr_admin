@@ -212,17 +212,19 @@ const NovelEdit: React.FC<EditType> = (props) => {
       onVisibleChange={visibleChange}
       width={window.innerWidth}
       onFinish={async (values) => {
-        if ((fileList === null || fileList.length === 0) && cover === '') {
-          message.error('请选择需要上传的封面');
-          return;
-        }
+        // if ((fileList === null || fileList.length === 0) && cover === '') {
+        //   message.error('请选择需要上传的封面');
+        //   return;
+        // }
         values.cover = cover;
         values.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const formData = getFormData(values);
         formData.set('tag', selectedTags.join(','));
-        fileList.forEach((file) => {
-          formData.append('file', file as RcFile);
-        });
+        if(fileList != null && fileList.length > 0){
+          fileList.forEach((file) => {
+            formData.append('file', file as RcFile);
+          });
+        }
         const resp = await request<DTO.Resp<any>>(url, {
           method: 'POST',
           data: formData,
@@ -561,9 +563,6 @@ const NovelEdit: React.FC<EditType> = (props) => {
               <div>
                 <div>
                   <span style={{ cursor: 'pointer' }}>
-                    <span className={styles.redpoint} style={{ color: '#ff4d4f' }}>
-                      *
-                    </span>{' '}
                     上传封面
                   </span>
                 </div>
