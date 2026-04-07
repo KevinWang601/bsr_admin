@@ -11,6 +11,8 @@ import { timeZoneConverter } from '@/util';
 import ChapterVipEdit from '@/components/ChapterVipEdit';
 import { useParams } from 'umi';
 import NovelChapterEdit from '@/components/NovelChapterEdit';
+import NovelVolumeEdit from '@/components/NovelVolumeEdit';
+import ChapterRemove from '@/components/ChapterRemove';
 
 const NovelSelect: React.FC<{
   value?: string;
@@ -121,6 +123,13 @@ const NovelChapterList: React.FC = () => {
       dataIndex: 'price',
     },
     {
+      title: '卷章节数',
+      search: false,
+      width: 80,
+      ellipsis: true,
+      dataIndex: 'chapterCount',
+    },
+    {
       title: '排序',
       search: false,
       width: 80,
@@ -164,8 +173,9 @@ const NovelChapterList: React.FC = () => {
         <OperationView
           key={index}
           component={[
-            { name: '付费', component: ChapterVipEdit },
-            { name: '编辑', component: NovelChapterEdit },
+            ...(record.type === 1 ? [{ name: '付费', component: ChapterVipEdit }] : []),
+            record.type == 1 ? { name: '编辑章', component: NovelChapterEdit } : { name: '编辑卷', component: NovelVolumeEdit },
+            {name: '删除', component: ChapterRemove}
           ]}
           operations={operations}
           record={record}

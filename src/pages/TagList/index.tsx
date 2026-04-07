@@ -118,7 +118,7 @@ const TagList: React.FC = () => {
         const result = await novelTagList(
           menuId || '',
           params.current || 1,
-          params.pageSize || 20,
+          params.pageSize || 100,
           params.keyword || '',
           params.adults || -1,
         );

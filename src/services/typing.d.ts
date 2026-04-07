@@ -222,6 +222,7 @@ declare namespace DTO {
     createTime?: Date;
     status?: number;
     note?: string;
+    segment?: number;
   };
 
   type CommentListItem = {

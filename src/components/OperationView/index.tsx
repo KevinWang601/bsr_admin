@@ -126,7 +126,12 @@ const OperationView: React.FC<OperationType> = (porps) => {
             btns.push(
               <CustomizedCompnent
                 key={operation.id}
-                trigger={<a>{operation.name}</a>}
+                trigger={<a style={{
+                  color:
+                    operation.name === '删除'
+                      ? '#F94A29'
+                      : '#1890FF',
+                }}>{operation.name}</a>}
                 record={record}
                 actionRef={actionRef}
                 url={url}
@@ -139,6 +144,7 @@ const OperationView: React.FC<OperationType> = (porps) => {
               key={operation.id}
               title={'确定' + operation.name + '?'}
               onConfirm={async () => {
+                
                 const resp = await request<DTO.Resp<any>>(url + '/' + record!.id, {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

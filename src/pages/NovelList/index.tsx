@@ -396,6 +396,14 @@ const NovelList: React.FC = () => {
       ],
     },
     {
+      title: '分片',
+      search: false,
+      width: 80,
+      ellipsis: true,
+      dataIndex: 'segment',
+      sorter: true,
+    },
+    {
       title: '操作',
       valueType: 'option',
       width: 200,

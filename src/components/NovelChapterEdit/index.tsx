@@ -25,12 +25,6 @@ const NovelChapterEdit: React.FC<EditType> = (props) => {
 
   const visibleChange = async (visible: boolean) => {
     if (visible) {
-      // formRef.current?.setFieldsValue({
-      //   parentId: {
-      //     value: record.parentId,
-      //     label: record.parentTitle,
-      //   },
-      // });
       formRef.current?.setFieldsValue(record);
       const result = await getChapterContent(record.novelId, record.id);
       if (result.result !== 'success') {
