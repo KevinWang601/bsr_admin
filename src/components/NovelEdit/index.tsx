@@ -102,7 +102,6 @@ const NovelEdit: React.FC<EditType> = (props) => {
    * 获取小说标签
    */
   const getTags = async (gender: number, adults: number) => {
-    debugger
     const result = await novelTags(gender, adults);
     if (result.result !== 'success') {
       message.error('获取小说标签失败');
@@ -181,7 +180,6 @@ const NovelEdit: React.FC<EditType> = (props) => {
         if (result.result !== 'success') {
           message.error('获取标签失败');
         }
-        debugger;
         formRef.current?.setFieldsValue({ tag: result.model });
         setSelectedTags(result.model);
         await getTags(record.gender, record.adults);
