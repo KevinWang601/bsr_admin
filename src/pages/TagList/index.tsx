@@ -118,7 +118,7 @@ const TagList: React.FC = () => {
         const result = await novelTagList(
           menuId || '',
           params.current || 1,
-          params.pageSize || 100,
+          params.pageSize || 20,
           params.keyword || '',
           params.adults || -1,
         );
@@ -131,7 +131,9 @@ const TagList: React.FC = () => {
       }}
       columnEmptyText={false}
       pagination={{
-        // pageSize: 20,
+        pageSize: 20,
+        showSizeChanger: true,
+        pageSizeOptions: ['10', '20', '50', '100'],
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
