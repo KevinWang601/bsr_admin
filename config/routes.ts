@@ -95,12 +95,12 @@ export default [
       {
         name: "热门推荐",
         path: "/novel/popular/:id",
-        component: "./PopularComicList",
+        component: "./PopularNovelList",
       },
       {
         name: "评论管理",
         path: "/novel/comment/:id",
-        component: "./ComicCommentList",
+        component: "./NovelCommentList",
       },
       {
         name: "浏览记录",
@@ -113,9 +113,9 @@ export default [
         component: "./ReadRecordCountList",
       },
       {
-        name: "漫画广告",
+        name: "小说广告",
         path: "/novel/advertisement/:id",
-        component: "./ComicAdvertisementList",
+        component: "./NovelAdvertisementList",
       },
     ],
   },

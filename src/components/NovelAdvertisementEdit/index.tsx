@@ -12,7 +12,7 @@ import { message, Image } from 'antd';
 import type { RcFile } from 'antd/lib/upload';
 import { useRef, useState } from 'react';
 
-const ComicAdvertisementEdit: React.FC<EditType> = (props) => {
+const NovelAdvertisementEdit: React.FC<EditType> = (props) => {
   const { trigger, record, actionRef, url } = props;
 
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -233,4 +233,4 @@ const ComicAdvertisementEdit: React.FC<EditType> = (props) => {
     </DrawerForm>
   );
 };
-export default ComicAdvertisementEdit;
+export default NovelAdvertisementEdit;

@@ -6,10 +6,10 @@ import { useRef } from 'react';
 import { message, Image } from 'antd';
 import { useState } from 'react';
 import OperationView from '@/components/OperationView';
-import ComicAdvertisementEdit from '@/components/ComicAdvertisementEdit';
+import NovelAdvertisementEdit from '@/components/NovelAdvertisementEdit';
 import { useParams } from 'umi';
 
-const ComicAdvertisementList: React.FC = () => {
+const NovelAdvertisementList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
   const menuId = queryParams.id;
 
@@ -96,7 +96,7 @@ const ComicAdvertisementList: React.FC = () => {
       render: (dom, record, index) => (
         <OperationView
           key={index}
-          component={[{ name: '编辑', component: ComicAdvertisementEdit }]}
+          component={[{ name: '编辑', component: NovelAdvertisementEdit }]}
           operations={operations}
           record={record}
           actionRef={actionRef}
@@ -146,7 +146,7 @@ const ComicAdvertisementList: React.FC = () => {
         <OperationView
           key={nanoid()}
           ids={ids.join(',')}
-          component={[{ name: '新增', component: ComicAdvertisementEdit }]}
+          component={[{ name: '新增', component: NovelAdvertisementEdit }]}
           operations={operations}
           actionRef={actionRef}
           position={1}
@@ -156,4 +156,4 @@ const ComicAdvertisementList: React.FC = () => {
     />
   );
 };
-export default ComicAdvertisementList;
+export default NovelAdvertisementList;
