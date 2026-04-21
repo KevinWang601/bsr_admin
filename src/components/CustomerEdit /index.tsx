@@ -1,5 +1,4 @@
 import { loadRoles } from '@/services/user';
-import { search } from '@/services/customer';
 import { getQueryString } from '@/util';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProFormDigit } from '@ant-design/pro-components';
@@ -12,19 +11,13 @@ import {
   ProFormSelect,
   ProFormText,
 } from '@ant-design/pro-components';
-import { message, Select } from 'antd';
+import { message } from 'antd';
 import type { SetStateAction } from 'react';
-import { useState } from 'react';
 import { useRef } from 'react';
 import { request } from 'umi';
-import FormItem from 'antd/lib/form/FormItem';
-
-const { Option } = Select;
 
 const CustomerEdit: React.FC<EditType> = (props) => {
   const { trigger, record, actionRef, url } = props;
-
-  const [data, setData] = useState<any[]>([]);
 
   const formRef = useRef<ProFormInstance>();
 
@@ -39,21 +32,6 @@ const CustomerEdit: React.FC<EditType> = (props) => {
           }
         }
         formRef.current?.setFieldsValue(record);
-        if (record.parent !== null) {
-          setData([
-            {
-              value: record.parent.number,
-              text: record.parent.loginName + '(' + record.parent.nickName + ')',
-            },
-          ]);
-        } else {
-          setData([
-            {
-              value: '0',
-              text: '无上级会员',
-            },
-          ]);
-        }
         if (record.authTimeFormat === '') {
           formRef.current?.setFieldsValue({ authTimeFormat: null });
         }
@@ -71,29 +49,6 @@ const CustomerEdit: React.FC<EditType> = (props) => {
       }
     }
   };
-
-  const searchParent = async (newValue: string) => {
-    if (newValue) {
-      const resp = await search(record ? record.id : 0, newValue);
-      if (resp.result === 'success') {
-        const customers = resp.model.map((item: any) => ({
-          value: item.number,
-          text: item.loginName + '(' + item.nickName + ')',
-        }));
-        setData([...customers]);
-      }
-    } else {
-      setData([]);
-    }
-  };
-
-  const parentOptions = data.map((d) => {
-    return (
-      <Option key={d.value} value={d.value}>
-        {d.text}
-      </Option>
-    );
-  });
 
   return (
     <DrawerForm
@@ -175,23 +130,9 @@ const CustomerEdit: React.FC<EditType> = (props) => {
           placeholder="请选择所属角色"
           rules={[{ required: true, message: '请选择所属角色' }]}
         />
-        <FormItem name="parentId" label="上级用户">
-          <Select
-            style={{ width: '328px' }}
-            showSearch
-            // defaultActiveFirstOption={false}
-            showArrow={false}
-            filterOption={false}
-            notFoundContent={null}
-            onSearch={searchParent}
-            placeholder="请搜索上级用户"
-          >
-            {parentOptions}
-          </Select>
-        </FormItem>
+        <ProFormText width="md" name="nickName" label="昵称" placeholder="请输入昵称" />
       </ProForm.Group>
       <ProForm.Group>
-        <ProFormText width="md" name="nickName" label="昵称" placeholder="请输入昵称" />
         <ProFormRadio.Group
           name="gender"
           label="性别"
@@ -204,10 +145,12 @@ const CustomerEdit: React.FC<EditType> = (props) => {
               label: '女',
               value: '女',
             },
+            {
+              label: '保密',
+              value: '保密',
+            },
           ]}
         />
-      </ProForm.Group>
-      <ProForm.Group>
         <ProFormDateTimePicker
           width="md"
           name="authTimeFormat"
@@ -216,6 +159,8 @@ const CustomerEdit: React.FC<EditType> = (props) => {
             format: (value) => value.format('YYYY-MM-DD HH:mm:ss'),
           }}
         />
+      </ProForm.Group>
+      <ProForm.Group>
         <ProFormDateTimePicker
           width="md"
           name="silentTimeFormat"
@@ -224,17 +169,17 @@ const CustomerEdit: React.FC<EditType> = (props) => {
             format: (value) => value.format('YYYY-MM-DD HH:mm:ss'),
           }}
         />
-      </ProForm.Group>
-      <ProForm.Group>
         <ProFormDigit
           width="md"
           name="balance"
-          label="U币"
-          placeholder="请输入U币"
+          label="金币"
+          placeholder="请输入点券"
           min={0}
           fieldProps={{ precision: 2 }}
-          rules={[{ required: true, message: '请输入U币' }]}
+          rules={[{ required: true, message: '请输入点券' }]}
         />
+      </ProForm.Group>
+      <ProForm.Group>
         <ProFormDigit
           width="md"
           name="authorRate"
@@ -244,8 +189,6 @@ const CustomerEdit: React.FC<EditType> = (props) => {
           fieldProps={{ precision: 2 }}
           rules={[{ required: true, message: '请输入提成比例' }]}
         />
-      </ProForm.Group>
-      <ProForm.Group>
         <ProFormDigit
           width="md"
           name="shareRate"
@@ -255,7 +198,8 @@ const CustomerEdit: React.FC<EditType> = (props) => {
           fieldProps={{ precision: 2 }}
           rules={[{ required: true, message: '请输入提成比例' }]}
         />
-
+      </ProForm.Group>
+      <ProForm.Group>
         <ProFormRadio.Group
           name="limiting"
           label="限流"
@@ -270,8 +214,6 @@ const CustomerEdit: React.FC<EditType> = (props) => {
             },
           ]}
         />
-      </ProForm.Group>
-      <ProForm.Group>
         <ProFormRadio.Group
           name="status"
           label="用户状态"
