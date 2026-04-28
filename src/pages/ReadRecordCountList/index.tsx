@@ -1,7 +1,7 @@
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { readRecordCountList } from '@/services/nvoel';
+import { readRecordCountList } from '@/services/novel';
 import { useRef } from 'react';
 import { message } from 'antd';
 import { useState } from 'react';

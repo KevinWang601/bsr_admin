@@ -1,4 +1,4 @@
-import { getNovel, randomEmployeeBsr, searchBsr } from '@/services/nvoel';
+import { getNovel, randomEmployeeBsr, searchBsr } from '@/services/novel';
 import { novelTags, novelTagIds } from '@/services/tag';
 import { novelCategories } from '@/services/category';
 import type { ProFormInstance } from '@ant-design/pro-components';

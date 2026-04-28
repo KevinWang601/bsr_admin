@@ -1,17 +1,16 @@
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { comicPopularList } from '@/services/nvoel';
+import { novelPopularList } from '@/services/novel';
 import { useRef } from 'react';
-import { message, Image } from 'antd';
+import { message } from 'antd';
 import { useState } from 'react';
 import OperationView from '@/components/OperationView';
-import PopularComicEdit from '@/components/PopularComicEdit';
-import PopularGroupEdit from '@/components/PopularGroupEdit ';
+import PopularNovelEdit from '@/components/PopularNovelEdit';
 import { timeZoneConverter } from '@/util';
 import { useParams } from 'umi';
 
-const PopularComicList: React.FC = () => {
+const PopularNovelList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
   const menuId = queryParams.id;
 
@@ -23,42 +22,9 @@ const PopularComicList: React.FC = () => {
     {
       title: '书名',
       formItemProps: { label: '关键字', name: 'keyword' },
-      dataIndex: 'comicTitle',
+      dataIndex: 'novelTitle',
       ellipsis: true,
       copyable: true,
-    },
-    {
-      title: '域',
-      ellipsis: true,
-      initialValue: 0,
-      valueType: 'select',
-      render: (dom, record) => {
-        switch (record.host) {
-          case 1:
-            return '全部';
-          case 2:
-            return 'FAV';
-          case 3:
-            return '51';
-          default:
-            return '未知';
-        }
-      },
-      formItemProps: { label: '域', name: 'host' },
-      request: async () => [
-        {
-          label: '请选择',
-          value: 0,
-        },
-        {
-          label: 'FAV',
-          value: 2,
-        },
-        {
-          label: '51',
-          value: 3,
-        },
-      ],
     },
     {
       title: '类型',
@@ -85,23 +51,6 @@ const PopularComicList: React.FC = () => {
       ],
     },
     {
-      title: '分组',
-      search: false,
-      dataIndex: 'showGroupDesc',
-    },
-    {
-      title: '推荐图',
-      search: false,
-      width: 180,
-      render: (dom, record) => {
-        if (record.imageUrl) {
-          return (
-            <Image src={record.imageUrl} width={160} height={70} style={{ borderRadius: '8px' }} />
-          );
-        }
-      },
-    },
-    {
       title: '排序',
       search: false,
       dataIndex: 'sort',
@@ -122,12 +71,12 @@ const PopularComicList: React.FC = () => {
       render: (dom, record, index) => (
         <OperationView
           key={index}
-          component={[{ name: '编辑', component: PopularComicEdit }]}
+          component={[{ name: '编辑', component: PopularNovelEdit }]}
           operations={operations}
           record={record}
           actionRef={actionRef}
           position={2}
-          module={'/comic'}
+          module={'/novel'}
         />
       ),
     },
@@ -150,7 +99,7 @@ const PopularComicList: React.FC = () => {
       cardBordered
       request={async (params = {}, sort, filter) => {
         console.log(params, sort, filter);
-        const result = await comicPopularList(
+        const result = await novelPopularList(
           menuId || '',
           params.current || 1,
           params.pageSize || 20,
@@ -178,14 +127,14 @@ const PopularComicList: React.FC = () => {
         <OperationView
           key={nanoid()}
           ids={ids.join(',')}
-          component={[{ name: '分组', component: PopularGroupEdit }]}
+          component={[]}
           operations={operations}
           actionRef={actionRef}
           position={1}
-          module={'/comic'}
+          module={'/novel'}
         />,
       ]}
     />
   );
 };
-export default PopularComicList;
+export default PopularNovelList;

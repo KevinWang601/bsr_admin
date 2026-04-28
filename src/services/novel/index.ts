@@ -137,8 +137,8 @@ export async function getChapterContent(novelId: string, chapterId: string) {
   });
 }
 
-/** 获取漫画评论列表 POST /comic/admin/comic/comment/list */
-export async function comicCommentList(
+/** 获取漫画评论列表 POST /novel/admin/novel/comment/list */
+export async function novelCommentList(
   menuId: string,
   page: number,
   rows: number,
@@ -157,8 +157,8 @@ export async function comicCommentList(
   });
 }
 
-/** 获取漫画热门和推荐列表 POST /comic/admin/comic/popular/list */
-export async function comicPopularList(
+/** 获取漫画热门和推荐列表 POST /novel/admin/novel/popular/list */
+export async function novelPopularList(
   menuId: string,
   page: number,
   rows: number,
@@ -166,7 +166,7 @@ export async function comicPopularList(
   type?: number,
   host?: number,
 ) {
-  return request<DTO.Resp<any>>(`${API_URL}/comic/admin/comic/popular/list`, {
+  return request<DTO.Resp<any>>(`${API_URL}/novel/admin/novel/popular/list`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     data: getQueryString({

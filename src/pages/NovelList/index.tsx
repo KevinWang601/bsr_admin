@@ -1,7 +1,7 @@
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { novelList } from '@/services/nvoel';
+import { novelList } from '@/services/novel';
 import type { SetStateAction } from 'react';
 import { useEffect, useRef } from 'react';
 import { message, Select } from 'antd';

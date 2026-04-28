@@ -1,4 +1,4 @@
-import { novelVolume } from '@/services/nvoel';
+import { novelVolume } from '@/services/novel';
 import { getQueryString } from '@/util';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import {

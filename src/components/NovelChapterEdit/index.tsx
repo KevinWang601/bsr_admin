@@ -14,7 +14,7 @@ import { Col, message, Row } from 'antd';
 import type { SetStateAction } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { request } from 'umi';
-import { getChapterContent, novelVolume } from '@/services/nvoel';
+import { getChapterContent, novelVolume } from '@/services/novel';
 
 const NovelChapterEdit: React.FC<EditType> = (props) => {
   const { trigger, record, actionRef, url } = props;

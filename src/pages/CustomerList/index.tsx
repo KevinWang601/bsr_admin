@@ -11,6 +11,7 @@ import OperationView from '@/components/OperationView';
 import CustomerEdit from '@/components/CustomerEdit ';
 import { timeZoneConverter } from '@/util';
 import { useParams } from 'umi';
+import EncryptedImage from '@/components/EncryptedImage';
 
 const RoleSelect: React.FC<{
   value?: string;
@@ -98,20 +99,7 @@ const CustomerList: React.FC = () => {
         if (record.avatarUrl === null || record.avatarUrl === '') {
           return '暂无头像';
         } else {
-          return <img src={record.avatarUrl} width={16} height={16} />;
-        }
-      },
-    },
-    {
-      title: '上级会员',
-      width: 160,
-      search: false,
-      ellipsis: true,
-      render: (dom, record) => {
-        if (record.parent === null) {
-          return '无';
-        } else {
-          return record.parent?.loginName + '(' + record.parent?.nickName + ')';
+          return <EncryptedImage src={record.avatarUrl} width={16} height={16} />;
         }
       },
     },
@@ -122,7 +110,7 @@ const CustomerList: React.FC = () => {
       dataIndex: 'roleNames',
     },
     {
-      title: '金币',
+      title: '点券',
       search: false,
       width: 80,
       dataIndex: 'balance',

@@ -1,7 +1,7 @@
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { nanoid } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { comicCommentList } from '@/services/nvoel';
+import { novelCommentList } from '@/services/novel';
 import { useRef } from 'react';
 import { message } from 'antd';
 import { timeZoneConverter } from '@/util';
@@ -9,7 +9,7 @@ import { useState } from 'react';
 import OperationView from '@/components/OperationView';
 import { useParams } from 'umi';
 
-const ComicCommentList: React.FC = () => {
+const NovelCommentList: React.FC = () => {
   const queryParams = useParams<{ id: string }>();
   const menuId = queryParams.id;
 
@@ -124,7 +124,7 @@ const ComicCommentList: React.FC = () => {
       scroll={{ x: 1500 }}
       request={async (params = {}, sort, filter) => {
         console.log(params, sort, filter);
-        const result = await comicCommentList(
+        const result = await novelCommentList(
           menuId || '',
           params.current || 1,
           params.pageSize || 20,
@@ -160,4 +160,4 @@ const ComicCommentList: React.FC = () => {
     />
   );
 };
-export default ComicCommentList;
+export default NovelCommentList;
