@@ -52,7 +52,7 @@
     "@ant-design/pro-components": "^1.1.15",
     "@babel/runtime": "^7.19.4",
     "@happys/money-format": "^1.2.9",
-    "@types/crypto-js": "^4.2.2",
+    "@types/crypto-js": "^4.2.0",
     "@types/opencc-js": "^1.0.0",
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@umijs/route-utils": "^2.0.0",
