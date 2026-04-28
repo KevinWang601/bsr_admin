@@ -22,7 +22,6 @@ import type { RcFile } from 'antd/es/upload/interface';
 import { getFormData } from '@/util';
 import { SyncOutlined } from '@ant-design/icons';
 import EncryptedImage from '../EncryptedImage';
-import styles from './index.module.css';
 import './theme.css';
 
 const NovelEdit: React.FC<EditType> = (props) => {
@@ -65,6 +64,7 @@ const NovelEdit: React.FC<EditType> = (props) => {
         });
       }
       setCoverUrl(src);
+      setEdit(false);
       return false;
     },
     onRemove: () => {
