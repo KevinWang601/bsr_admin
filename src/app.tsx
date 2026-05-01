@@ -17,13 +17,14 @@ import type { MenuDataItem, Settings as LayoutSettings } from '@ant-design/pro-c
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { PageLoading, ProBreadcrumb } from '@ant-design/pro-components';
 import type { RequestConfig, RunTimeLayoutConfig } from 'umi';
-import { history } from 'umi';
+import { history, KeepAlive } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { SmileOutlined, HeartOutlined, MenuOutlined } from '@ant-design/icons';
 import EventEmitter from '@/utils/eventEmitter';
 import { getLoginDto, removeLoginDto, saveUserMenus, removeUserMenus } from '@/util';
 import { loadMenus } from './services/user';
 import { message } from 'antd';
+import path from 'path';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/login';
@@ -188,21 +189,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 增加一个 loading 的状态
     childrenRender: (children, props) => {
       // if (initialState?.loading) return <PageLoading />;
+      const path = props.location?.pathname;
+      if(path?.includes('/login')){
+        return <>{children}</>
+      }
       return (
-        <>
+        <KeepAlive>
           {children}
-          {!props.location?.pathname?.includes('/login') && (
-            // <SettingDrawer
-            //   disableUrlParams
-            //   enableDarkTheme
-            //   settings={initialState?.settings}
-            //   onSettingChange={(settings) => {
-            //     setInitialState((preInitialState) => ({ ...preInitialState, settings }));
-            //   }}
-            // />
-            <></>
-          )}
-        </>
+        </KeepAlive>
       );
     },
     ...initialState?.settings,
