@@ -66,6 +66,17 @@ export default [
     ],
   },
   {
+    path: "/chat",
+    name: "聊天管理",
+    routes: [
+      {
+        name: "大模型管理",
+        path: "/chat/llmconfig/:id",
+        component: "./LlmConfigList",
+      },
+    ]
+  },
+  {
     path: "/workbench",
     name: "工作台管理",
     routes: [

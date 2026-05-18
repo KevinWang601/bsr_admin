@@ -551,6 +551,43 @@ declare namespace DTO {
     content?: string;
     sort?: number;
   };
+
+  type LlmConfigListItem = {
+    id?: string;
+    name?: string;
+    provider?: string;
+    modelId?: number;
+    apkKey?: string;
+    baseUrl: string;
+    parameters: string;
+    maxContextTokens: number;
+    jailbreakPrefix: string;
+    isDefault: number;
+    updateTime?: Date;
+    createTime?: Date;
+    status?: number;
+  };
+
+  type CharacterListItem = {
+    id?: string;
+    novelId?: string;
+    name?: string;
+    regexAliases?: string;
+    description?: string;
+    personality?: string;
+    scenario?: string;
+    firstMes?: string;
+    mesExample?: string;
+    systemPrompt?: string;
+    useNotes?: string;
+    psychoProfile?: string;
+    tags?: string;
+    avatar?: string;
+    updateTime?: Date;
+    createTime?: Date;
+    status?: number;
+  }
+
 }
 
 type Operation = {
